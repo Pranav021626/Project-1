@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="text-align:center; color:#2c3e50; margin-bottom:30px;">📱 Phone Number Information</h2>
+
+<div style="max-width:600px; margin:auto; padding:20px; background-color:#ecf0f1; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+
+    <p style="font-size:18px;"><strong>Number:</strong> <span style="color:#2980b9;">{{ number }}</span></p>
+
+    <p style="font-size:18px;"><strong>Country/Region:</strong> <span style="color:#27ae60;">{{ country }}</span></p>
+
+    <p style="font-size:18px;"><strong>Carrier:</strong> <span style="color:#8e44ad;">{{ carrier }}</span></p>
+
+    <p style="font-size:18px;"><strong>Timezone:</strong> 
+        <span style="color:#d35400;">
+            {% if timezone %}
+                {{ timezone|join:", " }}
+            {% else %}
+                Unknown
+            {% endif %}
+        </span>
+    </p>
+
+    <p style="font-size:18px;"><strong>Valid Number:</strong> <span style="color:#c0392b;">{{ valid }}</span></p>
+
+</div>
+
+<div style="text-align:center; margin-top:20px;">
+    <a href="/" style="padding:10px 20px; background-color:#34495e; color:white; text-decoration:none; border-radius:5px;">← Go Back</a>
+</div>
+
+{% endblock %}

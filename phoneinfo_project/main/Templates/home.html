@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+/* MAIN WRAPPER */
+.home-wrapper{
+min-height: 100vh;
+padding: 60px 20px;
+background: linear-gradient(-45deg, #667eea, #764ba2, #6a11cb, #2575fc);
+background-size: 400% 400%;
+animation: gradientBG 10s ease infinite;
+color: white;
+}
+
+@keyframes gradientBG {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+
+/* HERO */
+.hero{
+text-align:center;
+margin-bottom:60px;
+}
+
+.hero h1{
+font-size:50px;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:20px;
+opacity:0.9;
+}
+
+/* FORM */
+.form-box{
+max-width:500px;
+margin:40px auto;
+background: rgba(255,255,255,0.15);
+padding:40px;
+border-radius:20px;
+backdrop-filter: blur(12px);
+box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+.form-box input{
+width:100%;
+padding:15px;
+font-size:18px;
+border-radius:10px;
+border:none;
+margin-bottom:20px;
+outline:none;
+}
+
+.form-box button{
+width:100%;
+padding:15px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:white;
+color:#333;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.form-box button:hover{
+transform:scale(1.05);
+}
+
+/* FEATURES */
+.features{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+margin-top:60px;
+}
+
+.feature-card{
+background:rgba(255,255,255,0.2);
+padding:25px;
+width:230px;
+border-radius:15px;
+text-align:center;
+transition:0.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,0.35);
+}
+
+</style>
+
+<div class="home-wrapper">
+
+<div class="hero">
+<h1>📱 Phone Number Details Finder</h1>
+<p>Check Country, Carrier, Timezone & Validation Instantly</p>
+</div>
+
+<div class="form-box">
+
+<form method="POST" action="/result/">
+{% csrf_token %}
+<input type="text" name="number" placeholder="+91XXXXXXXXXX" required>
+<button type="submit">🔍 Check Now</button>
+</form>
+
+</div>
+
+<div class="features">
+
+<div class="feature-card">
+<h3>🌍 Country Info</h3>
+<p>Detect region of phone number.</p>
+</div>
+
+<div class="feature-card">
+<h3>📡 Network Provider</h3>
+<p>Find SIM carrier instantly.</p>
+</div>
+
+<div class="feature-card">
+<h3>⏰ Timezone</h3>
+<p>Check number timezone.</p>
+</div>
+
+<div class="feature-card">
+<h3>✅ Validation</h3>
+<p>Verify if number is valid.</p>
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
