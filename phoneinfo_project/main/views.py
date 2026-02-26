@@ -1,6 +1,9 @@
 from django.shortcuts import render
 import phonenumbers
 from phonenumbers import geocoder, carrier, timezone
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
 
 
 # ✅ HOME PAGE
@@ -51,3 +54,77 @@ def result(request):
 # ✅ ABOUT PAGE
 def about(request):
     return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+def signup_view(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get('username').strip()
+        email = request.POST.get('email').strip()
+        password = request.POST.get('password').strip()
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'signup.html', {'error': 'Username already exists'})
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+
+        login(request, user)
+        return redirect('home')
+
+    return render(request, 'signup.html')
+
+
+
+def signup_view(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get('username').strip()
+        email = request.POST.get('email').strip()
+        password = request.POST.get('password').strip()
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'signup.html', {'error': 'Username already exists'})
+
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+
+        login(request, user)
+        return redirect('home')
+
+    return render(request, 'signup.html')
+
+def login_view(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get('username').strip()
+        password = request.POST.get('password').strip()
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+
+    return render(request, 'login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+def profile(request):
+    return render(request, 'profile.html')  # Make sure this template exists    
