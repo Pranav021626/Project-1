@@ -125,6 +125,14 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
+@login_required
 def profile(request):
-    return render(request, 'profile.html')  # Make sure this template exists    
+    if request.method == 'POST' and request.FILES.get('image'):
+        request.user.profile.image = request.FILES['image']
+        request.user.profile.save()
+        return redirect('profile')
+
+    return render(request, 'profile.html')   
