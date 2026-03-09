@@ -1,4 +1,15 @@
+# Virtual environment
 venv/
+
+# Python cache
 __pycache__/
 *.pyc
+
+# Database
+db.sqlite3
+
+# Media files (profile pictures)
+media/
+
+# Environment variables
 .env

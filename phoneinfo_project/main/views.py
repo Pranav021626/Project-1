@@ -135,4 +135,19 @@ def profile(request):
         request.user.profile.save()
         return redirect('profile')
 
-    return render(request, 'profile.html')   
+    return render(request, 'profile.html')  
+
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import redirect
+
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        messages.success(request, "Your account has been deleted successfully.")
+        return redirect('home')
+    return redirect('profile') 
+    
+        
